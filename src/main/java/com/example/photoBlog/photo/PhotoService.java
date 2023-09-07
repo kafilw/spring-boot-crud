@@ -5,6 +5,8 @@ package com.example.photoBlog.photo;
 import java.util.List;
 // import com.example.photoBlog.photo.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -24,8 +26,10 @@ public class PhotoService {
 	}
 
 
-	public void addNewPhoto(Photo photo) {
+	public ResponseEntity<Photo> addNewPhoto(Photo photo) {
 		// System.out.println(photo);
-		photoRepository.save(photo);
+		Photo savedPhoto = photoRepository.save(photo);
+		return ResponseEntity.status(HttpStatus.CREATED).body(savedPhoto);
+
 	} 
 }
